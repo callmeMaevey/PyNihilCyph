@@ -13,7 +13,6 @@ def get_user_info() -> dict[str, str]:
     }
     for item in userinfo.keys():
         userinput: str = input("Please input the %s: " % item)
-        userinfo[item] = userinput.upper().replace(' ', '')
     return userinfo
 
 
@@ -60,16 +59,20 @@ def custom_vec_adder(pt: list[int], key: list[int]) -> list[int]:
 
 if __name__ == '__main__':
     info: dict[str, str] = get_user_info()
+
     try:
         polybius: list[str] = read_square(info["Path to Polybius Square"])
     except FileNotFoundError:
         print("File not found, Exiting...")
         exit(-1)
 
+    def clean(string: str) -> str: return string.upper().replace(' ', '')
+
+
     print(
         custom_vec_adder(
-            get_all_nums(polybius, info["PlainText"]),
-            get_all_nums(polybius, info["Key"])
+            get_all_nums(polybius, clean(info["PlainText"])),
+            get_all_nums(polybius, clean(info["Key"]))
         )
     )
 
