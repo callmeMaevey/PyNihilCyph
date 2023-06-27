@@ -12,10 +12,9 @@ def getuserinfo() -> dict[str, str]:
         "Path to Polybius Square": ""
     }
     for item in userinfo.keys():
-        userinput: str = input("Please input the %s" % item)
+        userinput: str = input("Please input the %s: " % item)
         userinfo[item] = userinput.upper().replace(' ', '')
     return userinfo
-
 
 
 def readsquare(squarepath) -> list[str]:
@@ -39,7 +38,7 @@ def getnum(square: list[str], char: str) -> int:
         if j != -1:
             break
     if j != -1:
-        return int(str(i+1) + str(j+1))
+        return int(str(i + 1) + str(j + 1))
 
 
 def getallnums(square: list[str], plaintext: str) -> list[int]:
@@ -49,21 +48,22 @@ def getallnums(square: list[str], plaintext: str) -> list[int]:
         out.append(num)
     return out
 
+
 def customVecAdder(pt: list[int], key: list[int]) -> list[int]:
     out: list[int] = []
     while len(key) < len(pt):
         key += key
     for i in range(0, len(pt)):
-        out.append(pt[i]+key[i])
+        out.append(pt[i] + key[i])
     return out
 
 
 if __name__ == '__main__':
     info: dict[str, str] = getuserinfo()
     polybius: list[str] = readsquare(info["Path to Polybius Square"])
-    ptnums = getallnums(polybius, info["PlainText"])
-    keynums = getallnums(polybius, info["Key"])
-    cryptictext = customVecAdder(ptnums, keynums)
+    ptnums: list[int] = getallnums(polybius, info["PlainText"])
+    keynums: list[int] = getallnums(polybius, info["Key"])
+    cryptictext: list[int] = customVecAdder(ptnums, keynums)
 
     print(cryptictext)
-
+    input("Press Enter to Close...")
