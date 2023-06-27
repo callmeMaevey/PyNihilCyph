@@ -13,10 +13,11 @@ def get_user_info() -> dict[str, str]:
     }
     for item in userinfo.keys():
         userinput: str = input("Please input the %s: " % item)
+        userinfo[item] = userinput
     return userinfo
 
 
-def read_square(square_path) -> list[str]:
+def read_square(square_path: str) -> list[str]:
     square: list[str] = []
     print(f'reading: {square_path}')
     with open(square_path, encoding="utf-8") as file:
